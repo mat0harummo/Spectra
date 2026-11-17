@@ -60,6 +60,7 @@ public static class SceneBuilder
         room.AddComponent<RoomScanner>();
         room.AddComponent<SurfaceMarkers>();
         room.AddComponent<SlimePlacer>();
+        room.AddComponent<SlimeWiper>();
 
         Directory.CreateDirectory(Path.GetDirectoryName(ScenePath));
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);

@@ -25,7 +25,8 @@ Assets/Spectra/
   Scripts/
     Room/      этап 1: работа с комнатой (MRUK)
     Slime/     этапы 2–3
-    Game/      этап 4
+    Game/      монетки (Wallet), этап 4
+    Input/     мышь для проверки в редакторе
     Ghosts/    этап 5
     Weapons/   этапы 6–7
   Prefabs/
