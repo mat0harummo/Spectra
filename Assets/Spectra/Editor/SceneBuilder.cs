@@ -34,10 +34,12 @@ public static class SceneBuilder
         rig.GetComponent<OVRManager>().isInsightPassthroughEnabled = true;
         rig.AddComponent<OVRPassthroughLayer>();
 
-        // Прозрачный фон камеры, чтобы сквозь него было видно комнату.
-        Camera cam = rig.GetComponentInChildren<Camera>();
-        cam.clearFlags = CameraClearFlags.SolidColor;
-        cam.backgroundColor = Color.clear;
+        // Прозрачный фон у всех камер рига, чтобы сквозь него было видно комнату.
+        foreach (Camera cam in rig.GetComponentsInChildren<Camera>(true))
+        {
+            cam.clearFlags = CameraClearFlags.SolidColor;
+            cam.backgroundColor = Color.clear;
+        }
 
         // MRUK загружает скан комнаты из шлема.
         // Без шлема (в редакторе) берёт одну из тестовых гостиных Meta.

@@ -5,6 +5,8 @@ using UnityEngine;
 
 // Ждёт, пока MRUK загрузит комнату, и собирает поверхности,
 // на которых потом будет появляться грязь (пол и столы).
+// Запускается раньше MRUK, чтобы успеть выбрать источник комнаты.
+[DefaultExecutionOrder(-1000)]
 public class RoomScanner : MonoBehaviour
 {
     public static RoomScanner Instance { get; private set; }
@@ -18,9 +20,19 @@ public class RoomScanner : MonoBehaviour
     [SerializeField] private MRUKAnchor.SceneLabels surfaceLabels =
         MRUKAnchor.SceneLabels.FLOOR | MRUKAnchor.SceneLabels.TABLE;
 
+    // Выключено: в редакторе берём тестовую комнату. Включить, когда шлем подключён по Link.
+    [SerializeField] private bool useHeadsetInEditor = false;
+
     private void Awake()
     {
         Instance = this;
+
+        if (Application.isEditor && !useHeadsetInEditor)
+        {
+            MRUK mruk = FindAnyObjectByType<MRUK>();
+            if (mruk != null)
+                mruk.SceneSettings.DataSource = MRUK.SceneDataSource.Prefab;
+        }
     }
 
     private void Start()
