@@ -59,6 +59,7 @@ public static class SceneBuilder
         var room = new GameObject("Room");
         room.AddComponent<RoomScanner>();
         room.AddComponent<SurfaceMarkers>();
+        room.AddComponent<SlimePlacer>();
 
         Directory.CreateDirectory(Path.GetDirectoryName(ScenePath));
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
