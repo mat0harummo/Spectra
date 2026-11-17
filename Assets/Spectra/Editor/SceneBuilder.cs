@@ -4,8 +4,8 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-// Собирает сцену этапа 1 одним пунктом меню: Spectra > Собрать сцену.
-// Камера шлема + passthrough + MRUK + наши скрипты комнаты.
+// Собирает сцену игры одним пунктом меню: Spectra > Собрать сцену.
+// Камера шлема + passthrough + MRUK + все наши скрипты.
 public static class SceneBuilder
 {
     private const string RigPath = "Packages/com.meta.xr.sdk.core/Prefabs/OVRCameraRig.prefab";
@@ -55,12 +55,18 @@ public static class SceneBuilder
         };
         mruk.SceneSettings.LoadSceneOnStartup = true;
 
-        // Наши скрипты.
+        // Наши скрипты. SurfaceMarkers (отладочные шарики) в игру больше не добавляем.
         var room = new GameObject("Room");
         room.AddComponent<RoomScanner>();
-        room.AddComponent<SurfaceMarkers>();
         room.AddComponent<SlimePlacer>();
         room.AddComponent<SlimeWiper>();
+
+        var game = new GameObject("Game");
+        game.AddComponent<GameManager>();
+        game.AddComponent<GhostSpawner>();
+        game.AddComponent<LaserVacuum>();
+        game.AddComponent<Shop>();
+        new GameObject("Hud").AddComponent<Hud>();
 
         Directory.CreateDirectory(Path.GetDirectoryName(ScenePath));
         EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);

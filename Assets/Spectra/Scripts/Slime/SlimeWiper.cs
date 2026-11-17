@@ -22,6 +22,14 @@ public class SlimeWiper : MonoBehaviour
 
     private void Update()
     {
+        // Стирать можно во время уборки и во время боя (за призраками).
+        GamePhase phase = GameManager.Instance.Phase;
+        if (phase != GamePhase.Cleaning && phase != GamePhase.Battle)
+        {
+            lastPoint = null;
+            return;
+        }
+
         if (TryGetWipePoint(out Vector3 point))
         {
             if (lastPoint.HasValue)

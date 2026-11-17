@@ -20,7 +20,7 @@ public class SlimePlacer : MonoBehaviour
 
     private void Update()
     {
-        if (!RoomScanner.Instance.IsReady)
+        if (!RoomScanner.Instance.IsReady || GameManager.Instance.Phase != GamePhase.Marking)
             return;
 
         if (TryGetPointerRay(out Ray ray))
