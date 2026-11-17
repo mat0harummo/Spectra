@@ -31,15 +31,17 @@ public static class SceneBuilder
         // Камера шлема с включённым passthrough (реальная комната вместо фона).
         var rig = (GameObject)PrefabUtility.InstantiatePrefab(rigPrefab);
         rig.GetComponent<OVRManager>().isInsightPassthroughEnabled = true;
-        var passthrough = rig.AddComponent<OVRPassthroughLayer>();
-        passthrough.overlayType = OVROverlay.OverlayType.Underlay;
+        rig.AddComponent<OVRPassthroughLayer>();
 
-        Camera cam = rig.GetComponent<OVRCameraRig>().centerEyeAnchor.GetComponent<Camera>();
+        // Прозрачный фон камеры, чтобы сквозь него было видно комнату.
+        Camera cam = rig.GetComponentInChildren<Camera>();
         cam.clearFlags = CameraClearFlags.SolidColor;
         cam.backgroundColor = Color.clear;
 
         // MRUK загружает скан комнаты из шлема.
         var mruk = new GameObject("MRUK").AddComponent<MRUK>();
+        if (mruk.SceneSettings == null)
+            mruk.SceneSettings = new MRUK.MRUKSettings();
         mruk.SceneSettings.DataSource = MRUK.SceneDataSource.Device;
         mruk.SceneSettings.LoadSceneOnStartup = true;
 
