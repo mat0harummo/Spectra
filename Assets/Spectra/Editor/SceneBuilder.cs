@@ -10,6 +10,7 @@ public static class SceneBuilder
 {
     private const string RigPath = "Packages/com.meta.xr.sdk.core/Prefabs/OVRCameraRig.prefab";
     private const string ScenePath = "Assets/Spectra/Scenes/Main.unity";
+    private const string RoomsPath = "Packages/com.meta.xr.mrutilitykit/Core/Rooms/Prefabs/LivingRoom/";
 
     [MenuItem("Spectra/Собрать сцену")]
     public static void Build()
@@ -39,10 +40,17 @@ public static class SceneBuilder
         cam.backgroundColor = Color.clear;
 
         // MRUK загружает скан комнаты из шлема.
+        // Без шлема (в редакторе) берёт одну из тестовых гостиных Meta.
         var mruk = new GameObject("MRUK").AddComponent<MRUK>();
         if (mruk.SceneSettings == null)
             mruk.SceneSettings = new MRUK.MRUKSettings();
-        mruk.SceneSettings.DataSource = MRUK.SceneDataSource.Device;
+        mruk.SceneSettings.DataSource = MRUK.SceneDataSource.DeviceWithPrefabFallback;
+        mruk.SceneSettings.RoomPrefabs = new[]
+        {
+            AssetDatabase.LoadAssetAtPath<GameObject>(RoomsPath + "LivingRoom00.prefab"),
+            AssetDatabase.LoadAssetAtPath<GameObject>(RoomsPath + "LivingRoom01.prefab"),
+            AssetDatabase.LoadAssetAtPath<GameObject>(RoomsPath + "LivingRoom02.prefab"),
+        };
         mruk.SceneSettings.LoadSceneOnStartup = true;
 
         // Наши скрипты.

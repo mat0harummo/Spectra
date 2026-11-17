@@ -18,7 +18,7 @@ Unity 6, шаблон **Universal 3D**, путь без кириллицы (на
 
 ## 3. Сцена
 
-Меню **Spectra > Собрать сцену**. Скрипт `SceneBuilder` создаст `Assets/Spectra/Scenes/Main.unity`:
+Меню **Spectra > Собрать сцену**. Без шлема MRUK загружает тестовую гостиную Meta, поэтому сцену можно проверять кнопкой Play прямо в редакторе. Скрипт `SceneBuilder` создаст `Assets/Spectra/Scenes/Main.unity`:
 камера шлема (OVRCameraRig) с passthrough, объект MRUK и объект `Room`
 со скриптами `RoomScanner` и `SurfaceMarkers`.
 После этого ещё раз откройте Project Setup Tool и нажмите **Fix All**:
