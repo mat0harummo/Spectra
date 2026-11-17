@@ -1,8 +1,5 @@
 using Meta.XR.MRUtilityKit;
 using UnityEngine;
-#if ENABLE_INPUT_SYSTEM
-using UnityEngine.InputSystem;
-#endif
 
 // Разметка: игрок указывает на место, которое хочет убрать, и там появляется слизь.
 // В шлеме: луч из правого контроллера + курок. В редакторе: клик мышью в окне Game.
@@ -38,9 +35,9 @@ public class SlimePlacer : MonoBehaviour
             return true;
         }
 
-        if (Application.isEditor && MouseClicked())
+        if (Application.isEditor && PointerInput.LeftClicked)
         {
-            ray = cam.ScreenPointToRay(MousePosition());
+            ray = cam.ScreenPointToRay(PointerInput.Position);
             return true;
         }
 
@@ -57,12 +54,4 @@ public class SlimePlacer : MonoBehaviour
             Debug.Log($"[Spectra] Слизь на поверхности: {surface.Label}");
         }
     }
-
-#if ENABLE_INPUT_SYSTEM
-    private static bool MouseClicked() => Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
-    private static Vector2 MousePosition() => Mouse.current.position.ReadValue();
-#else
-    private static bool MouseClicked() => Input.GetMouseButtonDown(0);
-    private static Vector2 MousePosition() => Input.mousePosition;
-#endif
 }
