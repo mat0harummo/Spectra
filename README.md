@@ -6,3 +6,11 @@ MR-игра для **Meta Quest 3** на Unity. Реальная комната 
 
 - План разработки по этапам: [docs/PLAN.md](docs/PLAN.md)
 - Настройка проекта и этап 1: [docs/STAGE1_SETUP.md](docs/STAGE1_SETUP.md)
+
+## Как открыть проект на другом компьютере
+
+1. Установить Unity **6000.6.0f1** (Unity 6.6) через Unity Hub.
+2. Скачать репозиторий: `git clone https://github.com/mat0harummo/Spectra` (или Code → Download ZIP).
+3. Unity Hub → **Add → Add project from disk** → папка репозитория. Путь лучше без кириллицы.
+4. При первом открытии Unity сам скачает пакеты, включая Meta XR SDK 209 (несколько минут; если серверы Meta не открываются, нужен VPN).
+5. Открыть сцену `Assets/Spectra/Scenes/Main.unity` и нажать **Play**.
